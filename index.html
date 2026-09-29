@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth h-full"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Stories - Live Counter</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FAF6F0',
+                        paper: '#F4ECE1',
+                        warmSand: '#E3D3C1',
+                        charcoal: '#2C2523',
+                        burgundy: '#8B3A3A',
+                        burgundyHover: '#722F2F',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4C5B9;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-cream text-charcoal font-sans antialiased min-h-screen flex flex-col justify-between items-center p-6 select-none">
+
+    <header class="w-full max-w-xl text-center pt-8 md:pt-12">
+        <p class="text-xs md:text-sm uppercase tracking-[0.35em] text-burgundy font-semibold mb-2">The World Of</p>
+        <h1 class="font-serif text-4xl md:text-6xl font-bold text-charcoal tracking-tight">
+            Our Stories
+        </h1>
+    </header>
+
+    <main class="w-full max-w-2xl my-auto py-8">
+        <div class="bg-paper/80 border border-warmSand/80 rounded-3xl p-6 md:p-10 shadow-sm text-center">
+            <p class="text-xs uppercase tracking-[0.3em] text-burgundy/80 font-semibold mb-1">
+                Since
+            </p>
+            <h2 class="font-serif text-2xl md:text-3xl font-medium text-charcoal mb-8">
+                04 Oktober 2025
+            </h2>
+
+            <!-- Counter Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 mb-8">
+                <div class="bg-cream p-4 md:p-6 rounded-2xl border border-warmSand/70 shadow-sm">
+                    <span id="days" class="block font-serif text-4xl md:text-5xl font-bold text-burgundy">0</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-charcoal/70 font-medium">Hari</span>
+                </div>
+                <div class="bg-cream p-4 md:p-6 rounded-2xl border border-warmSand/70 shadow-sm">
+                    <span id="hours" class="block font-serif text-4xl md:text-5xl font-bold text-burgundy">0</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-charcoal/70 font-medium">Jam</span>
+                </div>
+                <div class="bg-cream p-4 md:p-6 rounded-2xl border border-warmSand/70 shadow-sm">
+                    <span id="minutes" class="block font-serif text-4xl md:text-5xl font-bold text-burgundy">0</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-charcoal/70 font-medium">Menit</span>
+                </div>
+                <div class="bg-cream p-4 md:p-6 rounded-2xl border border-warmSand/70 shadow-sm">
+                    <span id="seconds" class="block font-serif text-4xl md:text-5xl font-bold text-burgundy">0</span>
+                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-charcoal/70 font-medium">Detik</span>
+                </div>
+            </div>
+
+            <div class="pt-2">
+                <a href="https://me-l.co/mwlxppek" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-burgundy hover:bg-burgundyHover text-cream font-serif text-sm md:text-base px-8 py-3.5 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform active:scale-95 group">
+                    <span>Lihat Kenangan</span>
+                    <i class="fa-solid font-xs fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pb-6 text-center text-xs text-charcoal/40 font-serif">
+        <!-- Clean minimal space -->
+    </footer>
+
+    <script>
+        // Tanggal Mulai: 04 Oktober 2025
+        const START_DATE = "2025-10-04T00:00:00";
+
+        function updateTimer() {
+            const startDate = new Date(START_DATE);
+            const now = new Date();
+            const diff = now - startDate;
+
+            if (isNaN(diff) || diff < 0) {
+                document.getElementById('days').innerText = "0";
+                document.getElementById('hours').innerText = "0";
+                document.getElementById('minutes').innerText = "0";
+                document.getElementById('seconds').innerText = "0";
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+        }
+
+        window.onload = function() {
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        };
+    </script>
+
+</body></html>
